@@ -40,6 +40,11 @@ loadTestFiles = (files, testsConvention) ->
       path = path.replace RegExp('\\\\', 'g'), '/'
       path.substring 0, path.lastIndexOf '.'
     .map (path) ->
+      # hacky fix for tests files that are in app folder. Using this
+      # as a temporary measure for running module tests stored under
+      # app/modules/*/test/
+      path = path.replace RegExp('app/', 'g'), ''
+    .map (path) ->
       "window.require('#{path}');"
     .join('\n') + '\n'
 
