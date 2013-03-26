@@ -5,7 +5,6 @@ debug = require('debug')('brunch:file-list')
 Asset = require './asset'
 SourceFile = require './source_file'
 helpers = require '../helpers'
-logger = require '../logger'
 sysPath = require 'path'
 
 # A list of `fs_utils.SourceFile` or `fs_utils.Asset`
@@ -117,6 +116,7 @@ module.exports = class FileList extends EventEmitter
         @_compileDependentFiles path
       else
         @_compile (@_findByPath(path) ? @_add path, compiler, linters, isHelper)
+
   _unlink: (path) =>
     ignored = @_ignored path
     if @_isAsset path
